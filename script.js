@@ -1,33 +1,45 @@
-const names = {
-  "ibrahim": {
-    meaning: "Father of many",
-    origin: "Arabic",
-    country: "Saudi Arabia, Bangladesh, Pakistan"
-  },
-  "muhammad": {
-    meaning: "Praised",
-    origin: "Arabic",
-    country: "Worldwide"
-  },
-  "john": {
-    meaning: "God is gracious",
-    origin: "Hebrew",
-    country: "USA, UK, Canada"
+const supabaseUrl = "https://ekbkdifscqphlotmrkwi.supabase.co";
+const supabaseKey = "sb_publishable_8gVK9JR0Dt7ldxrS5thUAQ_u3vOvsgl";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+async function searchName() {
+  const input = document.getElementById("searchInput").value.trim();
+
+  if (!input) {
+    document.getElementById("result").innerHTML = "<p>একটি নাম লিখুন।</p>";
+    return;
   }
-};
 
-function searchName() {
-  const input = document.getElementById("searchInput").value.toLowerCase();
-  const result = document.getElementById("result");
+  const { data, error } = await supabase
+    .from("names")
+    .select("*")
+    .ilike("name", input);
 
-  if (names[input]) {
-    result.innerHTML = `
-      <h2>${input.toUpperCase()}</h2>
-      <p><b>Meaning:</b> ${names[input].meaning}</p>
-      <p><b>Origin:</b> ${names[input].origin}</p>
-      <p><b>Countries:</b> ${names[input].country}</p>
+  if (error) {
+    document.getElementById("result").innerHTML =
+      "<p>ত্রুটি হয়েছে।</p>";
+    console.log(error);
+    return;
+  }
+
+  if (data.length === 0) {
+    document.getElementById("result").innerHTML =
+      "<p>নাম পাওয়া যায়নি।</p>";
+    return;
+  }
+
+  let html = "";
+
+  data.forEach(item => {
+    html += `
+      <h2>${item.name}</h2>
+      <p><b>Meaning:</b> ${item.meaning}</p>
+      <p><b>Origin:</b> ${item.origin}</p>
+      <p><b>Country:</b> ${item.countries}</p>
+      <hr>
     `;
-  } else {
-    result.innerHTML = "<h2>Name not found.</h2>";
-  }
+  });
+
+  document.getElementById("result").innerHTML = html;
 }
