@@ -1,69 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body{
-            margin:0;
-            font-family:Arial, sans-serif;
-            background:linear-gradient(135deg,#2563eb,#06b6d4);
-            color:white;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            text-align:center;
-        }
+  <title>Global Name Directory</title>
 
-        .container{
-            padding:30px;
-        }
-
-        h1{
-            font-size:42px;
-            margin-bottom:15px;
-        }
-
-        p{
-            font-size:20px;
-            margin-bottom:25px;
-        }
-
-        button{
-            padding:15px 30px;
-            font-size:18px;
-            border:none;
-            border-radius:30px;
-            background:white;
-            color:#2563eb;
-            cursor:pointer;
-        }
-
-        button:hover{
-            background:#f1f5f9;
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
-    <h1>🌍 Welcome</h1>
-    <p>My First Professional Website</p>
+<header class="header">
+    <h1>🌍 Global Name Directory</h1>
+    <p>Search Names From Around The World</p>
+</header>
 
-    <button onclick="showMessage()">
-        Click Here
+<section class="search-box">
+
+    <input
+    type="text"
+    id="searchInput"
+    placeholder="Search any name...">
+
+    <button onclick="searchName()">
+        Search
     </button>
-</div>
 
-<script>
-function showMessage(){
-    alert("🎉 Congratulations! Your website is working.");
-}
-</script>
+</section>
+
+<section id="result">
+
+<h2>Welcome</h2>
+
+<p>
+Search millions of names with their meanings,
+origin, language and country.
+</p>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Global Name Directory
+</p>
+
+</footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
